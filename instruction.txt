@@ -1,0 +1,2 @@
+python -m nuitka --standalone --windows-console-mode=disable main.py
+use this to compile game for release
