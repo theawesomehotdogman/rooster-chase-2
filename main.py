@@ -67,7 +67,6 @@ def maingame():
         catrectstick = pygame.Rect(cat.x,cat.y,125,125)
         stickrect = pygame.Rect(collect.x,collect.y,64,64)
         roosterrect = pygame.Rect(rooster.position.x,rooster.position.y,128,128)
-        #pygame.draw.rect(screen,(0,0,0),(cat.x + 50,cat.y + 60,30,30))
         if catrectstick.colliderect(stickrect):
             score += 1
             loadassets.getstick.play()
