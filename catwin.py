@@ -7,7 +7,7 @@ def show_text(msg, x, y, color, size):
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
 def catwin(screen,clock):
-    dagame = False
+    gameended = False
     while 1:  
         screen.fill((0,0,0))
         clock.tick(60)    
@@ -17,5 +17,5 @@ def catwin(screen,clock):
                 sys.exit
         screen.blit(loadassets.catwin,(0,0))
         pygame.display.update()
-        if dagame:
-            break
+        if gameended:
+            return()

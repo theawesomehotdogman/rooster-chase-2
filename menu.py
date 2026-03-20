@@ -1,6 +1,5 @@
 import pygame
 import sys
-import splashtext
 import loadassets
 def show_text(msg, x, y, color, size):
         from main import screen
@@ -27,4 +26,4 @@ def startscreen(screen,clock):
         #show_text(splashtext.picked,180,90,(255,255,255),48) #Splash text will be added later
         pygame.display.update()
         if dagame:
-            break
+            return()

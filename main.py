@@ -10,7 +10,7 @@ import sys
 import random
 pygame.init()
 screen = pygame.display.set_mode((640,480))
-whowon = 0   
+whowon = False   #False is rooster True is cat
 pygame.display.set_caption("Rooster Chase 2")
 def show_text(msg, x, y, color, size):
         fontobj= pygame.font.SysFont("freesans", size,bold=True,italic=False)
@@ -52,7 +52,7 @@ def maingame():
                 if event.key == pygame.K_d:
                     right = False
         if score == 15:
-            whowon = 1
+            whowon = True
             return()
 #####################################################
 #           Class Functions
@@ -72,7 +72,7 @@ def maingame():
             loadassets.getstick.play()
             collect.moveself()
         if catrectrooster.colliderect(roosterrect):
-            whowon = 2
+            whowon = False
             return()
         if roosterrect.colliderect(stickrect):
             collect.moveself()
@@ -80,8 +80,8 @@ def maingame():
 
 startscreen(screen,clock)
 maingame()
-if whowon == 1:
+if whowon:
     catwin.catwin(screen,clock)
-if whowon == 2:
+if whowon == False:
     roosterwin.rooswin(screen,clock)
 sys.exit()
