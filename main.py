@@ -7,7 +7,6 @@ import catwin
 import stick
 import roosterwin
 import sys
-import random
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 whowon = False   #False is rooster True is cat
@@ -54,7 +53,6 @@ def maingame():
         if score == 15:
             whowon = True
             return()
-#####################################################
 #           Class Functions
         screen.blit(loadassets.farm,(0,0))
         cat.move(up,down,left,right)
