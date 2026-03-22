@@ -1,11 +1,11 @@
 import pygame
 import resource.loadassets as loadassets
-from menu import startscreen
-import player
-import enemy
-import catwin
-import stick
-import roosterwin
+from menus.menu import startscreen
+import classes.player as player
+import classes.enemy as enemy
+import menus.catwin as catwin
+import classes.stick as stick
+import menus.roosterwin as roosterwin
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
