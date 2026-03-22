@@ -2,3 +2,4 @@
 /builds
 /__pycache__
 resource/__pycache__/loadassets.cpython-314.pyc
+/instruction.txt
