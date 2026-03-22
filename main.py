@@ -3,9 +3,8 @@ import resource.loadassets as loadassets
 from menus.menu import startscreen
 import classes.player as player
 import classes.enemy as enemy
-import menus.catwin as catwin
 import classes.stick as stick
-import menus.roosterwin as roosterwin
+import menus.winner as winner
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
@@ -79,7 +78,7 @@ def maingame():
 startscreen(screen,clock)
 maingame()
 if whowon:
-    catwin.catwin(screen,clock)
+    winner.catwin(screen,clock)
 if whowon == False:
-    roosterwin.rooswin(screen,clock)
+    winner.rooswin(screen,clock)
 sys.exit()
