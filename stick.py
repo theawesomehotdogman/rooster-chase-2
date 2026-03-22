@@ -1,5 +1,5 @@
 import pygame
-import loadassets
+import resource.loadassets as loadassets
 import random
 class Stick():
     def __init__(self,x,y):

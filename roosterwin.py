@@ -1,6 +1,6 @@
 import pygame
 import sys
-import loadassets
+import resource.loadassets as loadassets
 def show_text(msg, x, y, color, size):
         from main import screen
         fontobj= pygame.font.SysFont("freesans", size,bold=True,italic=False)

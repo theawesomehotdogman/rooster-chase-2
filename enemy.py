@@ -1,5 +1,5 @@
 import pygame
-import loadassets
+import resource.loadassets as loadassets
 class Rooster:
     def __init__(self):
         self.image = loadassets.rooster

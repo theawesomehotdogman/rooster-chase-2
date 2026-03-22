@@ -1,5 +1,5 @@
 import pygame
-import loadassets
+import resource.loadassets as loadassets
 from menu import startscreen
 import player
 import enemy

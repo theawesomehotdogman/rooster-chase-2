@@ -1,5 +1,5 @@
 import pygame
-import loadassets
+import resource.loadassets as loadassets
 class Player():
     def __init__(self):
         self.x = 30
