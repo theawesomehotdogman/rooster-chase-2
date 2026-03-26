@@ -77,8 +77,4 @@ def maingame():
 
 startscreen(screen,clock)
 maingame()
-if whowon:
-    winner.catwin(screen,clock)
-if whowon == False:
-    winner.rooswin(screen,clock)
-sys.exit()
+winner.whowon(screen,clock,whowon)
