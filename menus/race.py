@@ -1,11 +1,8 @@
 import pygame
 import resource.loadassets as loadassets
-from menus.menu import startscreen
 import classes.player as player
 import classes.enemy as enemy
 import classes.stick as stick
-import menus.race as race
-import menus.winner as winner
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
@@ -16,8 +13,7 @@ def show_text(msg, x, y, color, size):
         screen.blit(msgobj,(x, y))
 clock = pygame.time.Clock()
 whowon = False   #False is rooster True is cat
-inrace = False
-def maingame():
+def race():
     up,down,left,right = False,False,False,False
     global whowon
     paused = False
@@ -25,6 +21,7 @@ def maingame():
     rooster = enemy.Rooster()
     collect = stick.Stick(0,0)
     score = 0
+    roosterscore = 0
     collect.moveself()
     while 1:  
         screen.fill((0,0,0))
@@ -62,15 +59,19 @@ def maingame():
                     right = False
         if score == 15:
             whowon = True
-            return()
+            return(whowon)
+        if roosterscore == 15:
+            whowon = False
+            return(whowon)
 #           Class Functions
         screen.blit(loadassets.farm,(0,0))
         if paused == False:
             cat.move(up,down,left,right)
             cat.drawself()
             rooster.drawself(screen)
-            rooster.move(cat.x,cat.y)
+            rooster.move(collect.x,collect.y)
             show_text(str(score),320,10,(0,0,0),32)
+            show_text(str(roosterscore),500,10,(0,0,0),32)
             collect.drawself(screen)
             catrectrooster = pygame.Rect(cat.x + 50,cat.y + 60,30,30)
             catrectstick = pygame.Rect(cat.x,cat.y,125,125)
@@ -80,18 +81,10 @@ def maingame():
                 score += 1
                 loadassets.getstick.play()
                 collect.moveself()
-            if catrectrooster.colliderect(roosterrect):
-                whowon = False
-                return()
-            if roosterrect.colliderect(stickrect):
+            if stickrect.colliderect(roosterrect):
+                roosterscore += 1
+                loadassets.getstick.play()
                 collect.moveself()
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()
-
-inrace = startscreen(screen,clock)
-if inrace:
-    whowon = race.race() #This code works as well as it needs to so its fine
-else:
-    maingame()
-winner.whowon(screen,clock,whowon)

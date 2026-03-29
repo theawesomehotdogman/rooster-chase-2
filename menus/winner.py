@@ -15,10 +15,10 @@ def whowon(screen,clock,winner):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        if winner == False:
-            screen.blit(loadassets.roosterwin,(0,0))
         if winner:
             screen.blit(loadassets.catwin,(0,0))
+        else:
+            screen.blit(loadassets.roosterwin,(0,0))
         pygame.display.update()
         if gameended:
             return()
