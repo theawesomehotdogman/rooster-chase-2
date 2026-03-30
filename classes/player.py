@@ -12,10 +12,10 @@ class Player():
             self.y -= 5
         if down and self.y < 380:
            self.y += 5
-        if left:
+        if left and self.x > 0:
             self.x -= 5
             self.currentimage = self.imageleft
-        if right:
+        if right and self.x < 515:
             self.x += 5
             self.currentimage = self.imageright
     def drawself(self):

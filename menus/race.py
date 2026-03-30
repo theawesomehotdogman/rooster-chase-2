@@ -1,4 +1,5 @@
 import pygame
+import random
 import resource.loadassets as loadassets
 import classes.player as player
 import classes.enemy as enemy
@@ -19,10 +20,10 @@ def race():
     paused = False
     cat = player.Player()
     rooster = enemy.Rooster()
-    collect = stick.Stick(0,0)
+    rooster.speed = 2
+    collect = stick.Stick(random.randint(0,640),random.randint(0,450))
     score = 0
     roosterscore = 0
-    collect.moveself()
     while 1:  
         screen.fill((0,0,0))
         clock.tick(60 )    
@@ -80,11 +81,11 @@ def race():
             if catrectstick.colliderect(stickrect):
                 score += 1
                 loadassets.getstick.play()
-                collect.moveself()
+                collect.moveself(catrectstick,roosterrect)
             if stickrect.colliderect(roosterrect):
                 roosterscore += 1
                 loadassets.getstick.play()
-                collect.moveself()
+                collect.moveself(catrectstick,roosterrect)
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()

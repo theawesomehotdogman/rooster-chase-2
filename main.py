@@ -1,4 +1,5 @@
 import pygame
+import random
 import resource.loadassets as loadassets
 from menus.menu import startscreen
 import classes.player as player
@@ -10,6 +11,8 @@ import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 pygame.display.set_caption("Rooster Chase 2")
+game = True
+pygame.display.set_icon(loadassets.icon)
 def show_text(msg, x, y, color, size):
         fontobj= pygame.font.SysFont("freesans", size,bold=True,italic=False)
         msgobj = fontobj.render(msg,False,color)
@@ -23,9 +26,8 @@ def maingame():
     paused = False
     cat = player.Player()
     rooster = enemy.Rooster()
-    collect = stick.Stick(0,0)
+    collect = stick.Stick(random.randint(0,640),random.randint(0,450))
     score = 0
-    collect.moveself()
     while 1:  
         screen.fill((0,0,0))
         clock.tick(60 )    
@@ -79,19 +81,19 @@ def maingame():
             if catrectstick.colliderect(stickrect):
                 score += 1
                 loadassets.getstick.play()
-                collect.moveself()
+                collect.moveself(catrectstick,roosterrect)
             if catrectrooster.colliderect(roosterrect):
                 whowon = False
                 return()
             if roosterrect.colliderect(stickrect):
-                collect.moveself()
+                collect.moveself(catrectstick,roosterrect)
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()
-
-inrace = startscreen(screen,clock)
-if inrace:
-    whowon = race.race() #This code works as well as it needs to so its fine
-else:
-    maingame()
-winner.whowon(screen,clock,whowon)
+while game:
+    inrace = startscreen(screen,clock)
+    if inrace:
+        whowon = race.race() #This code works as well as it needs to so its fine
+    else:
+        maingame()
+    winner.whowon(screen,clock,whowon)

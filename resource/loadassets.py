@@ -12,4 +12,6 @@ stick = pygame.image.load("resource/character/stick.png")
 stick = pygame.transform.scale(stick,(64,64))
 #Sound
 getstick = pygame.mixer.Sound("resource/sound/getstick.wav")
-winsfx = pygame.mixer.Sound("resource/sound/win.wav")
+winsfx = pygame.mixer.Sound("resource/sound/win.mp3")
+#Other
+icon = pygame.image.load("resource/cat.ico")

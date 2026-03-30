@@ -6,6 +6,7 @@ def show_text(msg, x, y, color, size):
         fontobj= pygame.font.SysFont("freesans", size,bold=True,italic=False)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
+version = "v1.2" #Version number so I can keep track of releases
 def startscreen(screen,clock):
     gameended = False #Also bad variable name
     mouserect = None
@@ -34,6 +35,7 @@ def startscreen(screen,clock):
         show_text("Play",275,230,(255,255,255),30)
         pygame.draw.rect(screen,(255,0,0),(240,300,140,60))
         show_text("Race",275,310,(255,255,255),30)
+        show_text(version,600,460,(0,0,0),15)
         #Splash text will not be added later
         pygame.display.update()
         if gameended:
