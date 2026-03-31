@@ -3,7 +3,7 @@ import sys
 import resource.loadassets as loadassets
 def show_text(msg, x, y, color, size):
         from main import screen
-        fontobj= pygame.font.SysFont("freesans", size,bold=True,italic=False)
+        fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
 def whowon(screen,clock,winner):

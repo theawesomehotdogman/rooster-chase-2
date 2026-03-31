@@ -14,7 +14,7 @@ pygame.display.set_caption("Rooster Chase 2")
 game = True
 pygame.display.set_icon(loadassets.icon)
 def show_text(msg, x, y, color, size):
-        fontobj= pygame.font.SysFont("freesans", size,bold=True,italic=False)
+        fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
 clock = pygame.time.Clock()
@@ -37,6 +37,7 @@ def maingame():
                 sys.exit()
             #Key Detection
             if event.type == pygame.KEYDOWN:
+                #WASD
                 if event.key == pygame.K_w:
                     up = True
                 if event.key == pygame.K_s:
@@ -45,6 +46,7 @@ def maingame():
                     left = True
                 if event.key == pygame.K_d:
                     right = True
+                #Pause
                 if event.key == pygame.K_p:
                     if paused == False:
                         paused = True
@@ -52,8 +54,17 @@ def maingame():
                     if paused:
                         paused = False
                         break
-                    print(paused)
+                #Arrow Keys
+                if event.key == pygame.K_UP:
+                    up = True
+                if event.key == pygame.K_DOWN:
+                    down = True
+                if event.key == pygame.K_LEFT:
+                    left = True
+                if event.key == pygame.K_RIGHT:
+                    right = True
             if event.type == pygame.KEYUP:
+                #WASD
                 if event.key == pygame.K_w:
                     up = False
                 if event.key == pygame.K_s:
@@ -61,6 +72,15 @@ def maingame():
                 if event.key == pygame.K_a:
                     left = False
                 if event.key == pygame.K_d:
+                    right = False
+                #Arrow Keys
+                if event.key == pygame.K_UP:
+                    up = False
+                if event.key == pygame.K_DOWN:
+                    down = False
+                if event.key == pygame.K_LEFT:
+                    left = False
+                if event.key == pygame.K_RIGHT:
                     right = False
         if score == 15:
             whowon = True
@@ -70,8 +90,8 @@ def maingame():
         if paused == False:
             cat.move(up,down,left,right)
             cat.drawself()
-            rooster.drawself(screen)
-            rooster.move(cat.x,cat.y)
+            rooster.drawself(screen,cat.x) #False tells the rooster if in race or not
+            rooster.move(cat.x,cat.y,collect.isgold)
             show_text(str(score),320,10,(0,0,0),32)
             collect.drawself(screen)
             catrectrooster = pygame.Rect(cat.x + 50,cat.y + 60,30,30)
@@ -79,21 +99,24 @@ def maingame():
             stickrect = pygame.Rect(collect.x,collect.y,64,64)
             roosterrect = pygame.Rect(rooster.position.x,rooster.position.y,128,128)
             if catrectstick.colliderect(stickrect):
-                score += 1
+                if collect.isgold:
+                    score += 3
+                else:
+                    score += 1
                 loadassets.getstick.play()
-                collect.moveself(catrectstick,roosterrect)
+                collect.moveself(catrectstick,roosterrect,False) #The false is to tell the stick that the game is not in race mode
             if catrectrooster.colliderect(roosterrect):
                 whowon = False
                 return()
             if roosterrect.colliderect(stickrect):
-                collect.moveself(catrectstick,roosterrect)
+                collect.moveself(catrectstick,roosterrect,False)
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()
 while game:
     inrace = startscreen(screen,clock)
     if inrace:
-        whowon = race.race() #This code works as well as it needs to so its fine
+        whowon = race.race()
     else:
         maingame()
     winner.whowon(screen,clock,whowon)
