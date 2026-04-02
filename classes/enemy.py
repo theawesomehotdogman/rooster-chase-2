@@ -1,4 +1,5 @@
 import pygame
+import random
 import resource.loadassets as loadassets
 class Rooster:
     def __init__(self):
@@ -22,5 +23,7 @@ class Rooster:
         if isgold == False:
             self.speed = 3
         self.position = self.position.move_towards(target,self.speed)
-
+    def restposition(self): #Used for timed mode when rooster collides with cat
+        self.position.x = random.randint(0,640)
+        self.position.y = random.randint(0,480)
         

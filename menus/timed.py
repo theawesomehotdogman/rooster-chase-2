@@ -1,46 +1,41 @@
 import pygame
 import random
 import resource.loadassets as loadassets
-from menus.menu import startscreen
 import classes.player as player
 import classes.enemy as enemy
 import classes.stick as stick
-import menus.race as race
-import menus.winner as winner
-import menus.timed as timed
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 pygame.display.set_caption("Rooster Chase 2")
-game = True
-pygame.display.set_icon(loadassets.icon)
 def show_text(msg, x, y, color, size):
+        from main import screen
         fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
 clock = pygame.time.Clock()
 whowon = False   #False is rooster True is cat
-gamemode = 0
-gamestate = 0 #0 is normal, 1 is race, 2 is timed. Im sorry for using something like this but its the easiest solution i could find
-timesurvived = 0
-def maingame():
+def timedmode():
+    print("intimedmode")
     up,down,left,right = False,False,False,False
     global whowon
     paused = False
     cat = player.Player()
     rooster = enemy.Rooster()
+    rooster.speed = 4
     collect = stick.Stick(random.randint(0,600),random.randint(0,450))
-    score = 0
+    score = 0  #See this after you lose
+    timeleft = 10 #Timeleft shows on the screen like score
+    timer = 0
     while 1:  
         screen.fill((0,0,0))
-        clock.tick(60 )    
+        clock.tick(60)    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             #Key Detection
             if event.type == pygame.KEYDOWN:
-                #WASD
                 if event.key == pygame.K_w:
                     up = True
                 if event.key == pygame.K_s:
@@ -49,7 +44,6 @@ def maingame():
                     left = True
                 if event.key == pygame.K_d:
                     right = True
-                #Pause
                 if event.key == pygame.K_p:
                     if paused == False:
                         paused = True
@@ -57,17 +51,8 @@ def maingame():
                     if paused:
                         paused = False
                         break
-                #Arrow Keys
-                if event.key == pygame.K_UP:
-                    up = True
-                if event.key == pygame.K_DOWN:
-                    down = True
-                if event.key == pygame.K_LEFT:
-                    left = True
-                if event.key == pygame.K_RIGHT:
-                    right = True
+                    print(paused)
             if event.type == pygame.KEYUP:
-                #WASD
                 if event.key == pygame.K_w:
                     up = False
                 if event.key == pygame.K_s:
@@ -76,53 +61,41 @@ def maingame():
                     left = False
                 if event.key == pygame.K_d:
                     right = False
-                #Arrow Keys
-                if event.key == pygame.K_UP:
-                    up = False
-                if event.key == pygame.K_DOWN:
-                    down = False
-                if event.key == pygame.K_LEFT:
-                    left = False
-                if event.key == pygame.K_RIGHT:
-                    right = False
-        if score == 15:
-            whowon = True
-            return()
 #           Class Functions
         screen.blit(loadassets.farm,(0,0))
         if paused == False:
             cat.move(up,down,left,right)
             cat.drawself()
-            rooster.drawself(screen,cat.x) #False tells the rooster if in race or not
+            rooster.drawself(screen,cat.x) 
             rooster.move(cat.x,cat.y,collect.isgold)
-            show_text(str(score),320,10,(0,0,0),32)
+            show_text(str(timeleft),320,10,(0,0,0),32)
             collect.drawself(screen)
-            catrectrooster = pygame.Rect(cat.x + 50,cat.y + 60,30,30)
             catrectstick = pygame.Rect(cat.x,cat.y,125,125)
+            catrectrooster = pygame.Rect(cat.x + 50,cat.y + 60,30,30)
             stickrect = pygame.Rect(collect.x,collect.y,64,64)
             roosterrect = pygame.Rect(rooster.position.x,rooster.position.y,128,128)
             if catrectstick.colliderect(stickrect):
                 if collect.isgold:
-                    score += 3
+                    timeleft += 3
                 else:
-                    score += 1
+                    timeleft += 1
+                timer = 0
                 loadassets.getstick.play()
-                collect.moveself(catrectstick,roosterrect,False) #The false is to tell the stick that the game is not in race mode
+                collect.moveself(catrectstick,roosterrect,True)
+            if stickrect.colliderect(roosterrect):
+                collect.moveself(catrectstick,roosterrect,True) #I know its not really in a race but we still need golden sticks
+                loadassets.getstick.play()
             if catrectrooster.colliderect(roosterrect):
-                whowon = False
-                return()
-            if roosterrect.colliderect(stickrect):
-                collect.moveself(catrectstick,roosterrect,False)
+                timeleft -= 4
+                rooster.restposition()
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
+        timer += 1
+        if timer >= 60:
+            timer = 0
+            score += 1
+            timeleft -= 1
+            print("timerreset")
+        if timeleft <= 0:
+            return score
         pygame.display.update()
-while game:
-    gamemode = startscreen(screen,clock)
-    if gamemode == 1:
-        whowon = race.race()
-    elif gamemode == 0:
-        maingame()
-    elif gamemode == 2:
-        timesurvived = timed.timedmode()
-    winner.whowon(screen,clock,whowon,timesurvived)
-    timesurvived = 0

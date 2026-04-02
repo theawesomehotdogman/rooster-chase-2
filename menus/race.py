@@ -22,7 +22,7 @@ def race():
     cat = player.Player()
     rooster = enemy.Rooster()
     rooster.speed = 2
-    collect = stick.Stick(random.randint(0,640),random.randint(0,450))
+    collect = stick.Stick(random.randint(0,600),random.randint(0,450))
     score = 0
     roosterscore = 0
     while 1:  
@@ -59,10 +59,10 @@ def race():
                     left = False
                 if event.key == pygame.K_d:
                     right = False
-        if score == 15:
+        if score >= 15:
             whowon = True
             return(whowon)
-        if roosterscore == 15:
+        if roosterscore >= 15:
             whowon = False
             return(whowon)
 #           Class Functions
