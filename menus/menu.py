@@ -45,6 +45,7 @@ def startscreen(screen,clock):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousex,mousey = event.pos
                 mouserect = pygame.Rect(mousex,mousey,32,32)
+                #I hate how this looks but it works
                 if mouserect.colliderect(startbuttonrect):
                     return 0
                 elif mouserect.colliderect(racebuttonrect):

@@ -14,7 +14,6 @@ def show_text(msg, x, y, color, size):
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
 clock = pygame.time.Clock()
-whowon = False   #False is rooster True is cat
 def race():
     up,down,left,right = False,False,False,False
     global whowon
@@ -60,11 +59,9 @@ def race():
                 if event.key == pygame.K_d:
                     right = False
         if score >= 15:
-            whowon = True
-            return(whowon)
+            return True
         if roosterscore >= 15:
-            whowon = False
-            return(whowon)
+            return False
 #           Class Functions
         screen.blit(loadassets.farm,(0,0))
         if paused == False:

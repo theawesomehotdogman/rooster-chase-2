@@ -25,7 +25,6 @@ gamestate = 0 #0 is normal, 1 is race, 2 is timed. Im sorry for using something 
 timesurvived = 0
 def maingame():
     up,down,left,right = False,False,False,False
-    global whowon
     paused = False
     cat = player.Player()
     rooster = enemy.Rooster()
@@ -86,8 +85,7 @@ def maingame():
                 if event.key == pygame.K_RIGHT:
                     right = False
         if score == 15:
-            whowon = True
-            return()
+            return True
 #           Class Functions
         screen.blit(loadassets.farm,(0,0))
         if paused == False:
@@ -109,8 +107,7 @@ def maingame():
                 loadassets.getstick.play()
                 collect.moveself(catrectstick,roosterrect,False) #The false is to tell the stick that the game is not in race mode
             if catrectrooster.colliderect(roosterrect):
-                whowon = False
-                return()
+                return False
             if roosterrect.colliderect(stickrect):
                 collect.moveself(catrectstick,roosterrect,False)
         if paused:
@@ -121,7 +118,7 @@ while game:
     if gamemode == 1:
         whowon = race.race()
     elif gamemode == 0:
-        maingame()
+        whowon = maingame()
     elif gamemode == 2:
         timesurvived = timed.timedmode()
     winner.whowon(screen,clock,whowon,timesurvived)

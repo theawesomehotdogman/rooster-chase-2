@@ -32,4 +32,4 @@ def whowon(screen,clock,winner,timesurvived):
         pygame.display.update()
         if gameended:
             pygame.mixer.stop()
-            return()
+            return

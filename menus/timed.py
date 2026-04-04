@@ -14,11 +14,8 @@ def show_text(msg, x, y, color, size):
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
 clock = pygame.time.Clock()
-whowon = False   #False is rooster True is cat
 def timedmode():
-    print("intimedmode")
     up,down,left,right = False,False,False,False
-    global whowon
     paused = False
     cat = player.Player()
     rooster = enemy.Rooster()
@@ -87,7 +84,7 @@ def timedmode():
                 loadassets.getstick.play()
             if catrectrooster.colliderect(roosterrect):
                 timeleft -= 4
-                rooster.restposition()
+                rooster.resetposition()
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
         timer += 1
