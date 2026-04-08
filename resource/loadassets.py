@@ -1,3 +1,4 @@
+#It probably isnt an issue that I load everything into memory at one
 import pygame
 pygame.init()
 pygame.mixer.init()
@@ -16,5 +17,6 @@ goldenstick = pygame.image.load("resource/character/goldenstick.png")
 #Sound
 getstick = pygame.mixer.Sound("resource/sound/getstick.wav")
 winsfx = pygame.mixer.Sound("resource/sound/win.mp3")
+notgetstick = pygame.mixer.Sound("resource/sound/yousuck.wav")
 #Other
 icon = pygame.image.load("resource/cat.ico")

@@ -87,7 +87,7 @@ def race():
                     roosterscore += 3
                 else:
                     roosterscore += 1
-                loadassets.getstick.play()
+                loadassets.notgetstick.play()
                 collect.moveself(catrectstick,roosterrect,True)
         if paused:
             show_text("Paused",250,200,(255,255,0),50)

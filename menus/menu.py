@@ -6,7 +6,7 @@ def show_text(msg, x, y, color, size):
         fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
-version = "v1.4" #Version number so I can keep track of releases
+version = "v1.4.1" #Version number so I can keep track of releases
 def startscreen(screen,clock):
     gameended = False #Also bad variable name
     mouserect = None
