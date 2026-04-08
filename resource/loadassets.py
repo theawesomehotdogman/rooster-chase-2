@@ -1,4 +1,4 @@
-#It probably isnt an issue that I load everything into memory at one
+#It probably isnt an issue that I load everything into memory at once
 import pygame
 pygame.init()
 pygame.mixer.init()
