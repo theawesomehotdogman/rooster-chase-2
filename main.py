@@ -1,7 +1,7 @@
 import pygame
 import random
 import loadassets
-from menus.menu import startscreen
+import menus.menu as menu
 import classes.player as player
 import classes.enemy as enemy
 import classes.stick as stick
@@ -12,7 +12,6 @@ import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 pygame.display.set_caption("Rooster Chase 2")
-game = True
 pygame.display.set_icon(loadassets.icon)
 def show_text(msg, x, y, color, size):
         fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
@@ -20,6 +19,7 @@ def show_text(msg, x, y, color, size):
         screen.blit(msgobj,(x, y))
 clock = pygame.time.Clock()
 whowon = False   #False is rooster True is cat
+game = True
 gamemode = 0
 gamestate = 0 #0 is normal, 1 is race, 2 is timed. Im sorry for using something like this but its the easiest solution i could find
 timesurvived = 0
@@ -65,6 +65,10 @@ def maingame():
                     left = True
                 if event.key == pygame.K_RIGHT:
                     right = True
+                #Quit handling
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
             if event.type == pygame.KEYUP:
                 #WASD
                 if event.key == pygame.K_w:
@@ -114,12 +118,13 @@ def maingame():
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()
 while game:
-    gamemode = startscreen(screen,clock)
-    if gamemode == 1:
-        whowon = race.race()
-    elif gamemode == 0:
-        whowon = maingame()
-    elif gamemode == 2:
-        timesurvived = timed.timedmode()
+    gamemode = menu.startscreen(screen,clock)
+    match gamemode: #Fancy switch statement wowza
+        case 0:
+            whowon = maingame()
+        case 1:
+            whowon = race.race()
+        case 2:
+            timesurvived = timed.timedmode()
     winner.whowon(screen,clock,whowon,timesurvived)
     timesurvived = 0

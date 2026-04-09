@@ -49,6 +49,9 @@ def race():
                         paused = False
                         break
                     print(paused)
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w:
                     up = False

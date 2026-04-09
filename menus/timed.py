@@ -58,6 +58,10 @@ def timedmode():
                     left = False
                 if event.key == pygame.K_d:
                     right = False
+            #Quit also its in keyup but who cares does the same thing
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
 #           Class Functions
         screen.blit(loadassets.farm,(0,0))
         if paused == False:

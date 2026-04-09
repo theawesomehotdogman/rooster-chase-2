@@ -6,7 +6,9 @@ def show_text(msg, x, y, color, size):
         fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
-version = "v1.4.1" #Version number so I can keep track of releases
+version = "v1.4.2" #Version number so I can keep track of releases
+global fullscreen
+fullscreen = False
 def startscreen(screen,clock):
     gameended = False #Also bad variable name
     mouserect = None
@@ -42,6 +44,9 @@ def startscreen(screen,clock):
                         screen = pygame.display.set_mode((640,480))
                         frame = True
                         break
+                if event.key == pygame.K_ESCAPE: #Quit
+                    pygame.quit()
+                    sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mousex,mousey = event.pos
                 mouserect = pygame.Rect(mousex,mousey,32,32)
@@ -60,6 +65,6 @@ def startscreen(screen,clock):
         show_text("Race",275,310,(255,255,255),30)
         pygame.draw.rect(screen,(155,0,155),(240,380,140,60))
         show_text("Timed",270,390,(255,255,255),30)
-        show_text(version,600,460,(0,0,0),15)
+        show_text(version,596,460,(0,0,0),15)
         #Splash text will not be added later
         pygame.display.update()
