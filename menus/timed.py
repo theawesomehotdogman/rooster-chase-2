@@ -1,6 +1,6 @@
 import pygame
 import random
-import resource.loadassets as loadassets
+import loadassets
 import classes.player as player
 import classes.enemy as enemy
 import classes.stick as stick
