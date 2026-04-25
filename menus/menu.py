@@ -6,15 +6,14 @@ def show_text(msg, x, y, color, size):
         fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
         screen.blit(msgobj,(x, y))
-version = "v1.4.2" #Version number so I can keep track of releases
 global fullscreen
 fullscreen = False
+version = "1.5"
 def startscreen(screen,clock):
     gameended = False #Also bad variable name
     mouserect = None
     fullscreen = False
     frame = True
-    israce = False #Bad variable name but who cares
     startbuttonrect = pygame.Rect(240,220,140,60)
     racebuttonrect = pygame.Rect(240,300,140,60)
     timedbuttonrect = pygame.Rect(240,390,140,60)
@@ -57,10 +56,10 @@ def startscreen(screen,clock):
                     return 1
                 elif mouserect.colliderect(timedbuttonrect):
                     return 2
-        screen.blit(loadassets.farm,(0,0))
+        screen.blit(loadassets.choosablebackdrops[0],(0,0))
         show_text("Rooster Chase 2",140,2,(0,0,0),48)
         pygame.draw.rect(screen,(0,255,0),(240,220,140,60))
-        show_text("Play",275,230,(255,255,255),30)
+        show_text("Classic",258,230,(255,255,255),30)
         pygame.draw.rect(screen,(255,0,0),(240,300,140,60))
         show_text("Race",275,310,(255,255,255),30)
         pygame.draw.rect(screen,(155,0,155),(240,380,140,60))

@@ -11,9 +11,9 @@ class Rooster:
     def drawself(self,screen,target):
         screen = screen
         imagepicked = self.image[0]
-        if target + 64 > self.x:
+        if target >= self.position.x:
             imagepicked = self.image[0]
-        elif target + 64 < self.x:
+        elif target <= self.position.x:
             imagepicked = self.image[1]
         screen.blit(imagepicked,self.position)
     def move(self,targetx,targety,isgold):

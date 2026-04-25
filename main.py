@@ -8,6 +8,7 @@ import classes.stick as stick
 import menus.race as race
 import menus.winner as winner
 import menus.timed as timed
+from tkinter import messagebox
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
@@ -25,6 +26,7 @@ gamestate = 0 #0 is normal, 1 is race, 2 is timed. Im sorry for using something 
 timesurvived = 0
 def maingame():
     up,down,left,right = False,False,False,False
+    backdrop = loadassets.getimage()
     paused = False
     cat = player.Player()
     rooster = enemy.Rooster()
@@ -88,10 +90,10 @@ def maingame():
                     left = False
                 if event.key == pygame.K_RIGHT:
                     right = False
-        if score == 15:
+        if score >= 15:
             return True
 #           Class Functions
-        screen.blit(loadassets.farm,(0,0))
+        screen.blit(backdrop,(0,0))
         if paused == False:
             cat.move(up,down,left,right)
             cat.drawself()
@@ -118,7 +120,8 @@ def maingame():
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()
 while game:
-    gamemode = menu.startscreen(screen,clock)
+    #gamemode = menu.startscreen(screen,clock)
+    whowon = menu.startscreen(screen=screen,clock=clock)
     match gamemode: #Fancy switch statement wowza
         case 0:
             whowon = maingame()
@@ -126,5 +129,7 @@ while game:
             whowon = race.race()
         case 2:
             timesurvived = timed.timedmode()
+    if gamemode > 2:
+        messagebox.showerror("How?","This should never happen")
     winner.whowon(screen,clock,whowon,timesurvived)
     timesurvived = 0
