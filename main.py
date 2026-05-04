@@ -121,7 +121,7 @@ def maingame():
         pygame.display.update()
 while game:
     #gamemode = menu.startscreen(screen,clock)
-    whowon = menu.startscreen(screen=screen,clock=clock)
+    gamemode = menu.startscreen(screen=screen,clock=clock)
     match gamemode: #Fancy switch statement wowza
         case 0:
             whowon = maingame()

@@ -20,6 +20,7 @@ def timedmode():
     cat = player.Player()
     rooster = enemy.Rooster()
     rooster.speed = 4
+    backdrop = loadassets.getimage()
     collect = stick.Stick(random.randint(0,600),random.randint(0,450))
     score = 0  #See this after you lose
     timeleft = 10 #Timeleft shows on the screen like score
@@ -63,7 +64,7 @@ def timedmode():
                     pygame.quit()
                     sys.exit()
 #           Class Functions
-        screen.blit(loadassets.farm,(0,0))
+        screen.blit(backdrop,(0,0))
         if paused == False:
             cat.move(up,down,left,right)
             cat.drawself()

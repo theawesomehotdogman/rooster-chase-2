@@ -19,6 +19,7 @@ def race():
     global whowon
     paused = False
     cat = player.Player()
+    backdrop = loadassets.getimage()
     rooster = enemy.Rooster()
     rooster.speed = 2
     collect = stick.Stick(random.randint(0,600),random.randint(0,450))
@@ -66,7 +67,7 @@ def race():
         if roosterscore >= 15:
             return False
 #           Class Functions
-        screen.blit(loadassets.farm,(0,0))
+        screen.blit(backdrop,(0,0))
         if paused == False:
             cat.move(up,down,left,right)
             cat.drawself()
