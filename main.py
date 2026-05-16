@@ -8,7 +8,6 @@ import classes.stick as stick
 import menus.race as race
 import menus.winner as winner
 import menus.timed as timed
-from tkinter import messagebox
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
@@ -105,14 +104,11 @@ def maingame():
             catrectstick = pygame.Rect(cat.x,cat.y,125,125)
             stickrect = pygame.Rect(collect.x,collect.y,64,64)
             roosterrect = pygame.Rect(rooster.position.x,rooster.position.y,128,128)
-            if catrectstick.colliderect(stickrect):
-                if collect.isgold:
-                    score += 3
-                else:
-                    score += 1
+            if cat.catrectstick.colliderect(stickrect):
+                timeleft += collect.addscore()
                 loadassets.getstick.play()
                 collect.moveself(catrectstick,roosterrect,False) #The false is to tell the stick that the game is not in race mode
-            if catrectrooster.colliderect(roosterrect):
+            if cat.catrectrooster.colliderect(roosterrect):
                 return False
             if roosterrect.colliderect(stickrect):
                 collect.moveself(catrectstick,roosterrect,False)
@@ -129,7 +125,5 @@ while game:
             whowon = race.race()
         case 2:
             timesurvived = timed.timedmode()
-    if gamemode > 2:
-        messagebox.showerror("How?","This should never happen")
     winner.whowon(screen,clock,whowon,timesurvived)
     timesurvived = 0

@@ -77,11 +77,7 @@ def timedmode():
             stickrect = pygame.Rect(collect.x,collect.y,64,64)
             roosterrect = pygame.Rect(rooster.position.x,rooster.position.y,128,128)
             if catrectstick.colliderect(stickrect):
-                if collect.isgold:
-                    timeleft += 3
-                else:
-                    timeleft += 1
-                timer = 0
+                timeleft += collect.addscore()
                 loadassets.getstick.play()
                 collect.moveself(catrectstick,roosterrect,True)
             if stickrect.colliderect(roosterrect):

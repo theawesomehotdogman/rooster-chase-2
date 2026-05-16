@@ -7,6 +7,8 @@ class Player():
         self.imageleft = loadassets.cat[1]
         self.imageright = loadassets.cat[0]
         self.currentimage = self.imageright
+        self.catrectstick = pygame.Rect(self.x,self.y,125,125)
+        self.catrectrooster = pygame.Rect(self.x + 50,self.y + 60,30,30)
     def move(self,up,down,left,right):
         if up and self.y > 0:
             self.y -= 5
@@ -18,6 +20,8 @@ class Player():
         if right and self.x < 515:
             self.x += 5
             self.currentimage = self.imageright
+        self.catrectstick = pygame.Rect(self.x,self.y,125,125)
+        self.catrectrooster = pygame.Rect(self.x + 50,self.y + 60,30,30)
     def drawself(self):
        from main import screen
        screen.blit(self.currentimage,(self.x,self.y)) 

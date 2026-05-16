@@ -70,20 +70,12 @@ def race():
         screen.blit(backdrop,(0,0))
         if paused == False:
             cat.move(up,down,left,right)
-            cat.drawself()
-            rooster.drawself(screen,collect.x) #True tells the rooster that it is currently in race mode
             rooster.move(collect.x,collect.y,collect.isgold)
-            show_text(str(score),320,10,(0,0,0),32)
-            show_text(str(roosterscore),500,10,(0,0,0),32)
-            collect.drawself(screen)
             catrectstick = pygame.Rect(cat.x,cat.y,125,125)
             stickrect = pygame.Rect(collect.x,collect.y,64,64)
             roosterrect = pygame.Rect(rooster.position.x,rooster.position.y,128,128)
             if catrectstick.colliderect(stickrect):
-                if collect.isgold:
-                    score += 3
-                else:
-                    score += 1
+                score += collect.addscore()
                 loadassets.getstick.play()
                 collect.moveself(catrectstick,roosterrect,True) #The true in this method is to tell the stick if race is on or not
             if stickrect.colliderect(roosterrect):
@@ -93,6 +85,12 @@ def race():
                     roosterscore += 1
                 loadassets.notgetstick.play()
                 collect.moveself(catrectstick,roosterrect,True)
+            #Draw
+            cat.drawself()
+            rooster.drawself(screen,collect.x)
+            collect.drawself(screen)
+            show_text(str(score),320,10,(0,0,0),32)
+            show_text(str(roosterscore),500,10,(0,0,0),32)
         if paused:
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()

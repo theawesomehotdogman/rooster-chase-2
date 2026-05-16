@@ -34,3 +34,8 @@ class Stick():
             score += 1
             self.moveself()
             return score
+    def addscore(self):
+        if self.isgold:
+            return 3
+        else:
+            return 1

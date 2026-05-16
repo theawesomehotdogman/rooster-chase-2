@@ -8,7 +8,7 @@ def show_text(msg, x, y, color, size):
         screen.blit(msgobj,(x, y))
 global fullscreen
 fullscreen = False
-version = "v1.5.1"
+version = "v1.5.1_2"
 def startscreen(screen,clock):
     gameended = False #Also bad variable name
     mouserect = None
@@ -64,6 +64,6 @@ def startscreen(screen,clock):
         show_text("Race",275,310,(255,255,255),30)
         pygame.draw.rect(screen,(155,0,155),(240,380,140,60))
         show_text("Timed",270,390,(255,255,255),30)
-        show_text(version,596,460,(0,0,0),15)
+        show_text(version,580,460,(0,0,0),15)
         #Splash text will not be added later
         pygame.display.update()
