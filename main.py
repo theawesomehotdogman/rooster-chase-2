@@ -12,7 +12,7 @@ import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 pygame.display.set_caption("Rooster Chase 2")
-pygame.display.set_icon(loadassets.icon)
+pygame.display.set_icon(pygame.image.load("resource/cat.ico"))
 def show_text(msg, x, y, color, size):
         fontobj= pygame.font.Font("resource/font/freesans.TTF",size)
         msgobj = fontobj.render(msg,False,color)
@@ -55,8 +55,7 @@ def maingame():
 #           Class Functions
         screen.blit(backdrop,(0,0))
         if paused == False:
-            cat.move()
-            cat.drawself()
+            cat.mainloop()
             rooster.drawself(screen,cat.x) #False tells the rooster if in race or not
             rooster.move(cat.x,cat.y,collect.isgold)
             show_text(str(score),320,10,(0,0,0),32)

@@ -26,8 +26,6 @@ try:
     getstick = pygame.mixer.Sound("resource/sound/getstick.wav")
     winsfx = pygame.mixer.Sound("resource/sound/win.mp3")
     notgetstick = pygame.mixer.Sound("resource/sound/yousuck.wav")
-    #Other
-    icon = pygame.image.load("resource/cat.ico")
 except Exception as e:
     print(e)
     messagebox.showerror("Could not load assets","Asset folder may be missing")

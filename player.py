@@ -10,7 +10,8 @@ class Player():
         self.currentimage = self.imageright
         self.catrectstick = pygame.Rect(self.x,self.y,125,125)
         self.catrectrooster = pygame.Rect(self.x + 50,self.y + 60,30,30)
-    def move(self):
+    def mainloop(self):
+        from main import screen
         keys = pygame.key.get_pressed()
         up    = keys[pygame.K_w]
         down  = keys[pygame.K_s]
@@ -26,6 +27,4 @@ class Player():
             self.x += self.speed
         self.catrectstick = pygame.Rect(self.x,self.y,125,125)
         self.catrectrooster = pygame.Rect(self.x + 50,self.y + 60,30,30)
-    def drawself(self):
-       from main import screen
-       screen.blit(self.currentimage,(self.x,self.y)) 
+        screen.blit(self.currentimage,(self.x,self.y)) 

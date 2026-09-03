@@ -48,8 +48,7 @@ def timedmode():
 #           Class Functions
         screen.blit(backdrop,(0,0))
         if paused == False:
-            cat.move()
-            cat.drawself()
+            cat.mainloop()
             rooster.drawself(screen,cat.x) 
             rooster.move(cat.x,cat.y,collect.isgold)
             show_text(str(timeleft),320,10,(0,0,0),32)

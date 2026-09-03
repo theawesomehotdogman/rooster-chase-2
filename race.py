@@ -51,7 +51,7 @@ def race():
 #           Class Functions
         screen.blit(backdrop,(0,0))
         if paused == False:
-            cat.move()
+            cat.mainloop()
             rooster.move(collect.x,collect.y,collect.isgold)
             catrectstick = pygame.Rect(cat.x,cat.y,125,125)
             stickrect = pygame.Rect(collect.x,collect.y,64,64)
