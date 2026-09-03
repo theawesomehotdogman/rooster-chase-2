@@ -21,7 +21,7 @@ clock = pygame.time.Clock()
 whowon = False   #False is rooster True is cat
 game = True
 gamemode = 0
-gamestate = 0 #0 is normal, 1 is race, 2 is timed. Im sorry for using something like this but its the easiest solution i could find
+gamestate = 0
 timesurvived = 0
 def maingame():
     up,down,left,right = False,False,False,False
@@ -77,9 +77,8 @@ def maingame():
             show_text("Paused",250,200,(255,255,0),50)
         pygame.display.update()
 while game:
-    #gamemode = menu.startscreen(screen,clock)
     gamemode = menu.startscreen(screen=screen,clock=clock)
-    match gamemode: #Fancy switch statement wowza
+    match gamemode:
         case 0:
             whowon = maingame()
         case 1:
