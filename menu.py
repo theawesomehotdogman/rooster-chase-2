@@ -8,7 +8,7 @@ def show_text(msg, x, y, color, size):
         screen.blit(msgobj,(x, y))
 global fullscreen
 fullscreen = False
-version = "v1.5.1_2"
+version = "v1.6 (Internal)"
 def startscreen(screen,clock):
     gameended = False #Also bad variable name
     mouserect = None

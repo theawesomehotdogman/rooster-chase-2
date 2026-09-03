@@ -1,9 +1,9 @@
 import pygame
 import random
 import loadassets
-import classes.player as player
-import classes.enemy as enemy
-import classes.stick as stick
+import player as player
+import enemy as enemy
+import stick as stick
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
@@ -34,14 +34,6 @@ def timedmode():
                 sys.exit()
             #Key Detection
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    up = True
-                if event.key == pygame.K_s:
-                    down = True
-                if event.key == pygame.K_a:
-                    left = True
-                if event.key == pygame.K_d:
-                    right = True
                 if event.key == pygame.K_p:
                     if paused == False:
                         paused = True
@@ -50,23 +42,13 @@ def timedmode():
                         paused = False
                         break
                     print(paused)
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_w:
-                    up = False
-                if event.key == pygame.K_s:
-                    down = False
-                if event.key == pygame.K_a:
-                    left = False
-                if event.key == pygame.K_d:
-                    right = False
-            #Quit also its in keyup but who cares does the same thing
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
 #           Class Functions
         screen.blit(backdrop,(0,0))
         if paused == False:
-            cat.move(up,down,left,right)
+            cat.move()
             cat.drawself()
             rooster.drawself(screen,cat.x) 
             rooster.move(cat.x,cat.y,collect.isgold)

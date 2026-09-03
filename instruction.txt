@@ -1,3 +1,2 @@
-python -m nuitka --standalone --windows-console-mode=disable --windows-icon-from-ico=cat.ico --enable-plugin=tk-inter --file-version=0.0.0.0 --product-version=0.0.0.0 main.py
-use this to compile game for release
+python -m nuitka --standalone --windows-console-mode=disable --windows-icon-from-ico=cat.ico --enable-plugin=tk-inter --file-version=0.0.0.0 --product-version=0.0.0.0 --output-filename=RoosterChase main.py use this to compile game for release
 cool

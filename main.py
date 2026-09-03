@@ -1,13 +1,13 @@
 import pygame
 import random
 import loadassets
-import menus.menu as menu
-import classes.player as player
-import classes.enemy as enemy
-import classes.stick as stick
-import menus.race as race
-import menus.winner as winner
-import menus.timed as timed
+import menu as menu
+import player as player
+import enemy as enemy
+import stick as stick
+import race as race
+import winner as winner
+import timed as timed
 import sys
 pygame.init()
 screen = pygame.display.set_mode((640,480))
@@ -33,22 +33,11 @@ def maingame():
     score = 0
     while 1:  
         screen.fill((0,0,0))
-        clock.tick(60 )    
+        clock.tick(60)    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            #Key Detection
-            if event.type == pygame.KEYDOWN:
-                #WASD
-                if event.key == pygame.K_w:
-                    up = True
-                if event.key == pygame.K_s:
-                    down = True
-                if event.key == pygame.K_a:
-                    left = True
-                if event.key == pygame.K_d:
-                    right = True
                 #Pause
                 if event.key == pygame.K_p:
                     if paused == False:
@@ -57,44 +46,16 @@ def maingame():
                     if paused:
                         paused = False
                         break
-                #Arrow Keys
-                if event.key == pygame.K_UP:
-                    up = True
-                if event.key == pygame.K_DOWN:
-                    down = True
-                if event.key == pygame.K_LEFT:
-                    left = True
-                if event.key == pygame.K_RIGHT:
-                    right = True
                 #Quit handling
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-            if event.type == pygame.KEYUP:
-                #WASD
-                if event.key == pygame.K_w:
-                    up = False
-                if event.key == pygame.K_s:
-                    down = False
-                if event.key == pygame.K_a:
-                    left = False
-                if event.key == pygame.K_d:
-                    right = False
-                #Arrow Keys
-                if event.key == pygame.K_UP:
-                    up = False
-                if event.key == pygame.K_DOWN:
-                    down = False
-                if event.key == pygame.K_LEFT:
-                    left = False
-                if event.key == pygame.K_RIGHT:
-                    right = False
         if score >= 15:
             return True
 #           Class Functions
         screen.blit(backdrop,(0,0))
         if paused == False:
-            cat.move(up,down,left,right)
+            cat.move()
             cat.drawself()
             rooster.drawself(screen,cat.x) #False tells the rooster if in race or not
             rooster.move(cat.x,cat.y,collect.isgold)
